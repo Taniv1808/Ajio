@@ -9,6 +9,7 @@ import {
   ScrollView,
   SafeAreaView,
   Button,
+  StyleSheet
 } from "react-native";
 import { Value } from "react-native-reanimated";
 import imagePath from "../../constants/imagePath";
@@ -96,106 +97,85 @@ class Signup extends Component {
     return (
       <SafeAreaView>
         <ScrollView>
-          <View style={{ flex: 1, justifyContent: "center" }}>
+          <View style={styles.mainSignup}>
             <Text
               onPress={() => navigation.goBack()}
-              style={{
-                marginTop: 50,
-                marginLeft: 30,
-                fontSize: 20,
-                color: "blue",
-              }}
+              style={styles.signupBack}
             >
               <Image
                 source={imagePath.arrow}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />{" "}
+                style={styles.signupArrow}
+              />{"  "}
               Back to Login
             </Text>
-            <Text style={{ fontSize: 25, marginTop: 40, marginLeft: 23 }}>
+            <Text style={styles.signupText}>
               Welcome to AJIO
             </Text>
-            <Text style={{ fontSize: 16, marginLeft: 23, marginTop: 20 }}>
+            <Text style={styles.signupText1}>
               Join/Sign-in using
             </Text>
 
-            <View style={{ flexDirection: "row" }}>
+            <View style={styles.signMainImages}>
               <TouchableOpacity>
                 <View
-                  style={{
-                    alignItems: "center",
-                    marginTop: 20,
-                    padding: 16,
-                    borderWidth: 1,
-                    borderRadius: 13,
-                    marginLeft: 23,
-                    width: 150,
-                  }}
+                  style={styles.signImages}
                 >
                   <Image
                     source={imagePath.facebook}
-                    style={{ width: 20, height: 20, marginRight: 100 }}
+                    style={styles.signCenterImage}
                   />
-                  <Text style={{ marginTop: -20 }}>Facebook</Text>
+                  <Text style={styles.signCenterText}>Facebook</Text>
                 </View>
               </TouchableOpacity>
 
               <TouchableOpacity>
                 <View
-                  style={{
-                    alignItems: "center",
-                    padding: 16,
-                    borderWidth: 1,
-                    borderRadius: 13,
-                    width: 150,
-                    marginTop: 20,
-                    marginLeft: 10,
-                  }}
+                  style={styles.signImages}
                 >
                   <Image
                     source={imagePath.google}
-                    style={{ width: 20, height: 20, marginRight: 100 }}
+                    style={styles.signCenterImage}
                   />
-                  <Text style={{ marginTop: -20 }}>Google</Text>
+                  <Text style={styles.signCenterText}>Google</Text>
                 </View>
               </TouchableOpacity>
             </View>
 
-            <View style={{ marginLeft: 20, marginTop: 30 }}>
-              <Text style={{ fontSize: 16 }}>Your E-mail Address*</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionText}>Your E-mail Address*</Text>
               <TextInput
                 onBlur={() => this.emailValidator()}
                 onChangeText={(text) => {
                   this.setState({ email: text });
                 }}
                 placeholder="Enter Email"
-                style={{ width: 320, height: 38, marginTop: 5, padding: 5 }}
+                style={styles.centerText}
                 backgroundColor="pink"
                 placeholderTextColor="black"
               ></TextInput>
               <Text>{emailError}</Text>
             </View>
 
-            <View style={{ marginTop: 10, marginLeft: 20 }}>
-              <Text style={{ fontSize: 16 }}>Name*</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionText}>Name*</Text>
               <TextInput
                 onBlur={() => this.nameValidator()}
                 onChangeText={(text) => {
                   this.setState({ name: text });
                 }}
                 placeholder="Enter your Name"
-                style={{ width: 320, height: 38, marginTop: 5, padding: 5 }}
+                style={styles.centerText}
                 backgroundColor="pink"
                 placeholderTextColor="black"
               ></TextInput>
               <Text>{nameError}</Text>
             </View>
 
-            <View style={{ marginTop: 10, marginLeft: 20 }}>
-              <Text style={{ fontSize: 16 }}>Mobile*</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionText}>Mobile*</Text>
               <TextInput
                 placeholder="Enter your Mobile Number"
-                style={{ width: 320, height: 38, marginTop: 5, padding: 5 }}
+                style={styles.centerText}
                 backgroundColor="pink"
                 placeholderTextColor="black"
                 maxLength={10}
@@ -206,99 +186,63 @@ class Signup extends Component {
               </Text>
             </View>
 
-            <View style={{ marginTop: 20, marginLeft: 20 }}>
-              <Text style={{ fontSize: 16 }}>Password*</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionText}>Password*</Text>
               <TextInput
                 onBlur={() => this.passwordValidator()}
                 onChangeText={(text) => {
                   this.setState({ password: text });
                 }}
                 placeholder="Enter Password"
-                style={{ width: 320, height: 38, marginTop: 5, padding: 5 }}
+                style={styles.centerText}
                 backgroundColor="pink"
                 placeholderTextColor="black"
                 minLength={8}
               ></TextInput>
               <Text>{passwordError}</Text>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={styles.bottomText}>
                 <TextInput
                   placeholder="8+ characters"
-                  style={{
-                    width: 90,
-                    height: 30,
-                    marginTop: 5,
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    padding: 2,
-                  }}
+                  style={styles.bottomText1}
                   backgroundColor="grey"
                   placeholderTextColor="black"
                 ></TextInput>
                 <TextInput
                   placeholder="# special"
-                  style={{
-                    width: 70,
-                    height: 30,
-                    marginTop: 5,
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    padding: 2,
-                    marginLeft: 7,
-                  }}
+                  style={styles.bottomText2}
                   backgroundColor="grey"
                   placeholderTextColor="black"
                 ></TextInput>
                 <TextInput
                   placeholder="A Alphabet"
-                  style={{
-                    width: 70,
-                    height: 30,
-                    marginTop: 5,
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    padding: 1,
-                    marginLeft: 8,
-                  }}
+                  style={styles.bottomText2}
                   backgroundColor="grey"
                   placeholderTextColor="black"
                 ></TextInput>
                 <TextInput
                   placeholder="1 Number"
-                  style={{
-                    width: 70,
-                    height: 30,
-                    marginTop: 5,
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    padding: 2,
-                    marginLeft: 6,
-                  }}
+                  style={styles.bottomText2}
                   backgroundColor="grey"
                   placeholderTextColor="black"
                 ></TextInput>
               </View>
             </View>
 
-            <View style={{ marginTop: 20, marginLeft: 20, marginBottom: 10 }}>
+            <View style={styles.invite}>
               <TextInput
                 placeholder="Invite Code (Optional)"
-                style={{ width: 320, height: 38, marginTop: 5, padding: 5 }}
+                style={styles.centerText}
                 backgroundColor="pink"
                 placeholderTextColor="black"
               ></TextInput>
             </View>
-            <Text style={{ marginTop: 7, marginLeft: 43 }}>
+            <Text style={styles.signupText2}>
               By Signing In, I agreee to{" "}
-              <Text style={{ color: "blue" }}>Terms & Conditions.</Text>
+              <Text style={styles.signColor}>Terms & Conditions.</Text>
             </Text>
 
             <View
-              style={{
-                marginTop: 10,
-                width: 200,
-                marginLeft: 70,
-                marginBottom: 10,
-              }}
+              style={styles.signupButton}
             >
               {/* <TouchableOpacity style={{marginLeft:40,borderWidth:3,alignItems:'center'}}><Text  color='black'>Sign Up</Text></TouchableOpacity> */}
               <Button
@@ -317,3 +261,105 @@ class Signup extends Component {
 }
 
 export default Signup;
+
+// Signup Stylesheet
+const styles=StyleSheet.create({
+  mainSignup:{ 
+    flex: 1, 
+    justifyContent: "center" 
+  },
+  signupBack:{
+    marginTop: 50,
+    marginLeft: 30,
+    fontSize: 20,
+    color: "blue",
+  },
+  signupArrow:{ 
+    width: 20, 
+    height: 20, 
+    marginRight: 5 
+  },
+  signupText:{ 
+    fontSize: 25, 
+    marginTop: 40, 
+    marginLeft: 23 
+  },
+  signupText1:{ 
+    fontSize: 16, 
+    marginLeft: 23, 
+    marginTop: 20 
+  },
+  signMainImages:{ 
+    flexDirection: "row" 
+  },
+  signImages:{
+    alignItems: "center",
+    marginTop: 20,
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 13,
+    marginLeft: 18,
+    width: 150,
+  },
+  signCenterImage:{
+     width: 20, 
+     height: 20, 
+     marginRight: 
+     100 
+    },
+  signCenterText:{
+     marginTop: -20
+     },
+  section:{ 
+    marginLeft: 20, 
+    marginTop: 15
+   },
+  sectionText:{ 
+    fontSize: 16 
+  },
+  centerText:{ 
+    width: 320, 
+    height: 38, 
+    marginTop: 5, 
+    padding: 5 
+  },
+  bottomText:{ 
+    flexDirection: "row",
+     alignItems: "center" 
+    },
+  bottomText1:{
+    width: 90,
+    height: 30,
+    marginTop: 5,
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 2,
+  },
+  bottomText2:{
+    width: 70,
+    height: 30,
+    marginTop: 5,
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 1,
+    marginLeft: 6,
+  },
+  invite:{ 
+    marginTop: 20, 
+    marginLeft: 20, 
+    marginBottom: 10 
+  },
+  signupText2:{ 
+    marginTop: 7, 
+    marginLeft: 43 
+  },
+  signColor:{ 
+    color: "blue" 
+  },
+  signupButton:{
+    marginTop: 10,
+    width: 200,
+    marginLeft: 70,
+    marginBottom: 10,
+  }
+})

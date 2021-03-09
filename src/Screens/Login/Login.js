@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 import imagePath from "../../constants/imagePath";
 import navigationStrings from "../../Navigation/navigationStrings";
@@ -68,10 +69,10 @@ class Login extends Component {
       <View style={{ alignItems: "center" }}>
         <Image
           source={imagePath.logo}
-          style={{ width: 80, height: 80, marginTop: 60 }}
+          style={styles.logo1}
         />
 
-        <Text style={{ fontWeight: "bold", marginTop: 10, fontSize: 25 }}>
+        <Text style={styles.Ajio}>
           Welcome to AJIO
         </Text>
 
@@ -82,7 +83,7 @@ class Login extends Component {
               this.setState({ email: text });
             }}
             placeholder="Enter Mobile Number/Email"
-            style={{ width: 250, marginTop: 30, height: 38, padding: 5 }}
+            style={styles.mainText}
             backgroundColor="pink"
             placeholderTextColor="black"
           ></TextInput>
@@ -93,7 +94,7 @@ class Login extends Component {
               this.setState({ password: text });
             }}
             placeholder="Enter Password"
-            style={{ marginTop: 15, width: 250, height: 38, padding: 5 }}
+            style={styles.mainText}
             backgroundColor="pink"
             placeholderTextColor="black"
             minLength={8}
@@ -101,7 +102,7 @@ class Login extends Component {
           <Text>{passwordError}</Text>
         </View>
 
-        <View style={{ marginTop: 25, width: 250 }}>
+        <View style={styles.loginButton}>
           <Button
             title="LogIn"
             color="black"
@@ -111,18 +112,18 @@ class Login extends Component {
           ></Button>
         </View>
 
-        <Text style={{ marginTop: 30, marginLeft: 9 }}>
+        <Text style={styles.loginText}>
           By Signing In, I agreee to{" "}
-          <Text style={{ color: "blue" }}>Terms & Conditions.</Text>
+          <Text style={styles.colorText}>Terms & Conditions.</Text>
         </Text>
-        <Text style={{ marginTop: 15 }}>Don't have an account?</Text>
+        <Text style={styles.loginAccount}>Don't have an account?</Text>
 
         <TouchableOpacity>
           <Text
             onPress={() =>
               this.props.navigation.navigate(navigationStrings.SIGNUP)
             }
-            style={{ color: "blue", marginTop: 13 }}
+            style={styles.mainSignup}
           >
             Sign Up
           </Text>
@@ -130,22 +131,13 @@ class Login extends Component {
 
         <TouchableOpacity>
           <View
-            style={{
-              marginRight: 30,
-              alignItems: "center",
-              marginTop: 20,
-              padding: 16,
-              borderWidth: 1,
-              borderRadius: 20,
-              marginLeft: 25,
-              width: 250,
-            }}
+            style={styles.fb}
           >
             <Image
               source={imagePath.facebook}
-              style={{ width: 30, height: 30, marginRight: 150 }}
+              style={styles.loginImages}
             />
-            <Text style={{ marginTop: -28, marginLeft: 50 }}>
+            <Text style={styles.texts}>
               Continue with Facebook
             </Text>
           </View>
@@ -153,22 +145,13 @@ class Login extends Component {
 
         <TouchableOpacity>
           <View
-            style={{
-              alignItems: "center",
-              marginTop: 30,
-              marginRight: 30,
-              padding: 16,
-              borderWidth: 1,
-              borderRadius: 20,
-              width: 250,
-              marginLeft: 25,
-            }}
+            style={styles.google1}
           >
             <Image
               source={imagePath.google}
-              style={{ width: 30, height: 30, marginRight: 150 }}
+              style={styles.loginImages}
             />
-            <Text style={{ marginTop: -28, marginLeft: 50 }}>
+            <Text style={styles.texts}>
               Continue with Google
             </Text>
           </View>
@@ -179,3 +162,70 @@ class Login extends Component {
 }
 
 export default Login;
+
+// LogIn Stylesheet
+const styles=StyleSheet.create({
+  logo1:{ 
+    width: 80, 
+    height: 80, 
+    marginTop: 60 
+  },
+  Ajio:{ 
+    fontWeight: "bold", 
+    marginTop: 10, 
+    fontSize: 25 
+  },
+  mainText:{ 
+    width: 250, 
+    marginTop: 20, 
+    height: 38, 
+    padding: 5 
+  },
+  loginButton:{ 
+    marginTop: 25, 
+    width: 250 
+  },
+  loginText:{ 
+    marginTop: 30, 
+    marginLeft: 9 
+  },
+  colorText:{
+     color: "blue"
+     },
+  loginAccount:{
+     marginTop: 15
+     },
+  mainSignup:{ 
+    color: "blue", 
+    marginTop: 13
+   },
+   fb:{
+    marginRight: 30,
+    alignItems: "center",
+    marginTop: 20,
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 20,
+    marginLeft: 25,
+    width: 250,
+  },
+  loginImages:{ 
+    width: 30, 
+    height: 30, 
+    marginRight: 150
+   },
+  texts:{ 
+    marginTop: -28, 
+    marginLeft: 50 
+  },
+  google1:{
+    alignItems: "center",
+    marginTop: 30,
+    marginRight: 30,
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 20,
+    width: 250,
+    marginLeft: 25,
+  },
+})

@@ -7,12 +7,14 @@ import {
   ScrollView,
   SafeAreaView,
   FlatList,
+  StyleSheet,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Carousel from "../../Components/Carousel";
 import Test from "../../Components/Test";
 import Shopping from "../../Components/Test";
 import imagePath from "../../constants/imagePath";
+import navigationStrings from "../../Navigation/navigationStrings";
 
 class Homepage extends Component {
   constructor(props) {
@@ -22,81 +24,98 @@ class Homepage extends Component {
         {
           id: 1,
           image1:
-            'https://www.shopperwear.com/media/catalog/product/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/p/l/plus-size-clothing-men-shirts-long-sleeve-2017-new-spring-solid-color-slim-fit-shirt-cotton-casual-shirt-men-clothes-extra-image-4.jpg',
+            "https://www.shopperwear.com/media/catalog/product/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/p/l/plus-size-clothing-men-shirts-long-sleeve-2017-new-spring-solid-color-slim-fit-shirt-cotton-casual-shirt-men-clothes-extra-image-4.jpg",
           name: "LEVIS",
-          price: "Rs.2,500",
+          price: 2500,
         },
         {
           id: 2,
           image1:
             "https://assets.ajio.com/medias/sys_master/root/20210228/GIlV/603abd1daeb269698174762f/blackberrys_green_checked_slim_fit_shirt.jpg",
           name: "Tom Hiddle",
-          price: "Rs.4,500",
+          price: 4500,
         },
         {
           id: 3,
           image1:
             "https://assets.ajio.com/medias/sys_master/root/20210228/9yxW/603abcdbf997dd5c400113b6/marks_&_spencer_cream_textured_shirt_with_flap_pockets.jpg",
           name: "NETPLAY",
-          price: "Rs.1,500",
+          price: 1500,
         },
         {
           id: 4,
           image1:
             "https://assets.ajio.com/medias/sys_master/root/20210228/mw4e/603ab854aeb2696981743fd4/marks_&_spencer_gold_slim_fit_crew-_neck_t-shirt.jpg",
           name: "ADIDAS",
-          price: "Rs.2,500",
+          price: 2500,
         },
         {
           id: 5,
           image1:
             "https://assets.ajio.com/medias/sys_master/root/20210228/EOgH/603abd49aeb26969817478d3/the_kaftan_company_beige_kaftans_with_short_sleeves.jpg",
           name: "ZARA",
-          price: "Rs.5,500",
+          price: 5500,
         },
         {
           id: 6,
           image1:
             "https://assets.ajio.com/medias/sys_master/root/20210228/hqhB/603abcc17cdb8c1f14525e90/the_kaftan_company_pink_floral_print_skater_dress.jpg",
           name: "CHANNEL",
-          price: "Rs.7,500",
+          price: 7500,
         },
         {
           id: 7,
           image1:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYR6iLkLC3MT2tkP_ENKstlPqAoymssXpZhA&usqp=CAU",
-          name: "SPIRIT",
-          price: "Rs.500",
+            "https://assets.ajio.com/medias/sys_master/root/20210225/FcUK/60374f97aeb26969816fe78d/united_colors_of_benetton_navy_blue_mid-rise_joggers_with_drawstring_fastening.jpg",
+          name: "UCB",
+          price: 3500,
         },
         {
-          id:8,
-          image1:'https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-          name:'BURBERRY',
-          price:'Rs.1000'
+          id: 8,
+          image1:
+            "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          name: "BURBERRY",
+          price: 1000,
         },
       ],
       iterator: 1,
       counter: 0,
+      emptyArray: [],
     };
   }
-  addCart = () => {
-    let { iterator, counter } = this.state;
+  addCart = (item) => {
+    let { counter, emptyArray } = this.state;
+    let newCart = [...emptyArray, ...[item]];
+    let index = emptyArray.findIndex((data) => data.id == item.id);
+    if (!(index == -1)) {
+      alert('Already added')
+      this.setState({
+
+      });
+    }else{
     this.setState({
-      counter: counter + iterator,
+      emptyArray: newCart,
+      counter: counter + 1,
+    });}
+  };
+  componentDidMount = () => {
+    let { emptyArray } = this.state;
+    this.focusListner = this.props.navigation.addListener("focus", () => {
+      // alert("Item added");
+      console.log(this.props);
+      if (this.props.route.params) {
+        this.addCart(this.props.route.params.product);
+      }
     });
   };
-  componentDidMount() {
-    this.focusListner = this.props.navigation.addListener("focus", () => {
-      alert("Back to homepage");
-    });
-  }
   componentWillUnmount() {
     if (this.focusListner) {
       this.focusListner();
     }
   }
   render() {
-    let { imageArray, counter} = this.state;
+    let { imageArray, counter,emptyArray } = this.state;
+    const{navigation}=this.props
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flexDirection: "row", marginTop: 70 }}>
@@ -112,8 +131,35 @@ class Homepage extends Component {
           <TouchableOpacity>
             <Image
               source={imagePath.bell}
-              style={{ width: 30, height: 30, marginLeft: 110 }}
+              style={{ width: 28, height: 28, marginLeft: 60 }}
             />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(navigationStrings.CART, {
+                taniv: emptyArray,
+              })
+            }
+          >
+            <Image
+              source={imagePath.cart}
+              style={{ width: 35, height: 35, marginLeft: 10 }}
+            />
+            <Text
+              style={{
+                position: "absolute",
+                zIndex: 234,
+                left: 30,
+                backgroundColor: "red",
+                borderRadius: 100,
+                textAlign:'center',
+                width:15,
+                height:18
+              
+              }}
+            >
+              {counter}
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -121,8 +167,8 @@ class Homepage extends Component {
             marginTop: 20,
             borderWidth: 1,
             borderRadius: 5,
-            width: 240,
-            marginLeft: 70,
+            width: 250,
+            marginLeft: 60,
             height: 40,
             marginBottom: 8,
           }}
@@ -139,7 +185,7 @@ class Homepage extends Component {
 
         <ScrollView>
           <Carousel />
-          
+
           <View>
             <Image
               source={{
@@ -183,14 +229,15 @@ class Homepage extends Component {
               ></Test>
             );
           })} */}
-          <FlatList 
-          data={imageArray}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-          keyExtractor={(item)=>item.id}
-          ItemSeparatorComponent={()=>(<View style={{marginBottom:10}}/>)}
-          renderItem={({item})=>(<Test data={item} onAdd={this.addCart}/>)}/>
-          
+          <FlatList
+            data={imageArray}
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            keyExtractor={(item) => item.id}
+            ItemSeparatorComponent={() => <View style={{ marginBottom: 10 }} />}
+            renderItem={({ item }) => <Test data={item} onAdd={this.addCart} />}
+          />
+
           <View
             style={{
               backgroundColor: "#dcdcdc",
@@ -220,48 +267,7 @@ class Homepage extends Component {
               style={{ width: "100%", height: 150 }}
             />
           </View>
-         
         </ScrollView>
-        <View style={{ flexDirection: "row", marginBottom: -170 }}>
-          <TouchableOpacity>
-            <Image
-              source={imagePath.home}
-              style={{ width: 40, height: 40, marginTop: 18, marginLeft: 12 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={imagePath.stores}
-              style={{ width: 40, height: 40, marginTop: 18, marginLeft: 30 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={imagePath.profile}
-              style={{ width: 40, height: 40, marginTop: 18, marginLeft: 30 }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Image
-              source={imagePath.wishlist}
-              style={{ width: 50, height: 50, marginTop: 14, marginLeft: 30 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={{ marginLeft: "auto" }}>{counter}</Text>
-            <Image
-              source={imagePath.bag}
-              style={{
-                width: 40,
-                height: 40,
-                marginBottom: 180,
-                marginLeft: 30,
-              }}
-            />
-          </TouchableOpacity>
-          
-        </View>
       </View>
     );
   }

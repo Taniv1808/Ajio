@@ -6,5 +6,6 @@ export default {
     STORES:'stores',
     CART:'cart',
     WISHLIST:'wishlist',
-    ACCOUNT:'account'
+    ACCOUNT:'account',
+    CHECKOUT:'checkout',
 }

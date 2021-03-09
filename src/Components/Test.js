@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { View, Text, Image, Button, FlatList } from "react-native";
+import { View, Text, Image, Button, FlatList,StyleSheet } from "react-native";
 import navigationStrings from "../Navigation/navigationStrings";
 import { Detail } from "../Screens";
 Detail;
@@ -24,26 +24,20 @@ export default function Test(props) {
         >
           <Image
             source={{ uri: data.image1 }}
-            style={{ width: 170, height: 220,margin:6}}
+            style={styles.mainImages}
           />
         </TouchableOpacity>
 
-        <Text style={{ marginLeft: 65 }}>{data.name}</Text>
-        <Text style={{ marginLeft: 65}}>{data.price}</Text>
+        <Text style={styles.mainNames}>{data.name}</Text>
+        <Text style={styles.mainNames}>Rs.{data.price}</Text>
         <TouchableOpacity
-          style={{ marginLeft: 50 }}
+          style={styles.mainAdd}
           onPress={() => {
-            onAdd();
+            onAdd(data);
           }}
         >
           <Text
-            style={{
-              borderWidth: 1,
-              width: 90,
-              padding: 5,
-              backgroundColor: "grey",
-              borderRadius: 5,
-            }}
+            style={styles.mainCart}
           >
             Add to Cart
           </Text>
@@ -52,3 +46,26 @@ export default function Test(props) {
     </View>
   );
 }
+
+// Test Stylesheet
+const styles=StyleSheet.create({
+  mainImages:{
+     width: 170,
+     height: 220,
+     margin:6
+    },
+  mainNames:{
+     marginLeft: 65 
+    },
+  mainAdd:{ 
+    marginLeft: 50
+   },
+  mainCart:{
+    borderWidth: 1,
+    width: 90,
+    padding: 5,
+    backgroundColor: "grey",
+    borderRadius: 5,
+  }
+
+})

@@ -11,5 +11,18 @@ export default{
     profile:require('../../assets/images/account.png'),
     wishlist:require('../../assets/images/wishlist.png'),
     bag:require('../../assets/images/bag.png'),
-    whatsapp:require('../../assets/images/whatsapp.png')
+    whatsapp:require('../../assets/images/whatsapp.png'),
+    color:require('../../assets/images/color.png'),
+    navy:require('../../assets/images/navy.png'),
+    green:require('../../assets/images/green.png'),
+    grey:require('../../assets/images/grey.png'),
+    cart:require('../../assets/images/cart.png'),
+    remove:require('../../assets/images/remove.png'),
+    // user:require('../../assets/images/profile.png')
+    down:require('../../assets/images/downarrow.png'),
+    side:require('../../assets/images/side.png'),
+    share:require('../../assets/images/share.png'),
+    phone:require('../../assets/images/phone.png'),
+    locate:require('../../assets/images/location.jpg'),
+    mail:require('../../assets/images/email.jpg')
 }

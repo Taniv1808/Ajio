@@ -8,7 +8,6 @@ import AuthStack from "./AuthStack";
 // import { Account, Cart, Detail, Homepage, Stores, Wishlist } from "../Screens";
 import MainStack from "./MainStack";
 
-
 const Stack = createStackNavigator();
 Stack.Screen;
 

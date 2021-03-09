@@ -10,6 +10,7 @@ import Cart from '../Screens/Cart/Cart';
 import Wishlist from '../Screens/Wishlist/Wishlist';
 import Stores from '../Screens/Stores/Stores';
 import Account from '../Screens/Account/Account';
+
 Wishlist
 Stores
 Account
@@ -40,7 +41,7 @@ export default function BottomTabNavigator() {
         }}
       />
        <Tab.Screen
-        name="Cart"
+        name={navigationStrings.CART}
         component={Cart}
         options={{
           tabBarLabel: 'Cart',
